@@ -1,4 +1,4 @@
-package com.example.graphproject.graphutils;
+package com.example.graphproject.graphUtils;
 
 import java.io.IOException;
 

@@ -1,4 +1,4 @@
-package com.example.graphproject.graphutils;
+package com.example.graphproject.graphUtils;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -35,17 +35,5 @@ public class GraphTextPrinter extends GraphPrinter {
         }
         output.close();
     }
-    //Maybe should be in testUtils
-    public void printToConsol() {
-        System.out.printf("%d %d\n",graph.getRows(), graph.getCollumns());
-        for (int i = 0; i < graph.getSize(); i++) {
-            System.out.print("     ");
-            for (int j = 0; j < graph.getNodeFromGraph(i).getSize(); j++) {
-                int nodeId = graph.getNodeFromGraph(i).getEdgeFromNode(j).getNodeId();
-                double weight = graph.getNodeFromGraph(i).getEdgeFromNode(j).getWeightOfEdge();
-                System.out.printf("%d :%.16f  ", nodeId, weight);
-            }
-            System.out.print("\n");
-        }
-    }
+
 }

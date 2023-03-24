@@ -1,6 +1,6 @@
 package com.example.graphproject.functions;
 
-import com.example.graphproject.graphutils.Graph;
+import com.example.graphproject.graphUtils.Graph;
 
 import java.util.Arrays;
 import java.util.LinkedList;

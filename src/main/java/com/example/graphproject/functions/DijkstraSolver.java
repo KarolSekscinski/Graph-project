@@ -1,8 +1,8 @@
 package com.example.graphproject.functions;
 
-import com.example.graphproject.graphutils.Edge;
-import com.example.graphproject.graphutils.Graph;
-import com.example.graphproject.graphutils.Node;
+import com.example.graphproject.graphUtils.Edge;
+import com.example.graphproject.graphUtils.Graph;
+import com.example.graphproject.graphUtils.Node;
 
 import java.util.PriorityQueue;
 
@@ -34,7 +34,9 @@ abstract public class DijkstraSolver {
             priorityQueue.add(tempDistance);
             distances[tempDistance.getNodeId()] = tempDistance;
         }
+
         NodeDistance currentEdgeDistance;
+
         while (!priorityQueue.isEmpty()) {
             currentEdgeDistance = priorityQueue.poll();
             isVisited[currentEdgeDistance.getNodeId()] = true;
