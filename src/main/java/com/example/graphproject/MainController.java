@@ -1,7 +1,7 @@
 package com.example.graphproject;
 
 import com.example.graphproject.functions.BfsSolver;
-import com.example.graphproject.graphutils.*;
+import com.example.graphproject.graphUtils.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
