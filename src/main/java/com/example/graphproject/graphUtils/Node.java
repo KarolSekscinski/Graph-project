@@ -11,6 +11,7 @@ public class Node {
         this.nodeId = nodeId;
         this.edgesOfNode = edgesOfNode;
     }
+
     public Node(int newNodeid) {
         edgesOfNode = new ArrayList<>();
         nodeId = newNodeid;
@@ -23,6 +24,7 @@ public class Node {
     public ArrayList<Edge> getEdgesOfNode() {
         return edgesOfNode;
     }
+
     public void addEdgeToNode(int nodeId, Edge edge) {
         if (nodeId <= 3) {
             edgesOfNode.add(nodeId, edge);
@@ -34,6 +36,7 @@ public class Node {
     public Edge getEdgeFromNode(int nodeId) {
         return edgesOfNode.get(nodeId);
     }
+
     public int getSize() {
         return edgesOfNode.size();
     }

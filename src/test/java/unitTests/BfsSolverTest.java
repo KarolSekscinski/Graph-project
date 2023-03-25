@@ -54,7 +54,7 @@ public class BfsSolverTest {
     }
 
     @Test
-    public void testingBfsSolverFromFileIncoherentGraph() throws IOException{
+    public void testingBfsSolverFromFileIncoherentGraph() throws IOException {
         //given
         GraphTextReader graphTextReader = new GraphTextReader("src/main/resources/com/example/graphproject/GraphsDirectory/incoherent.txt");
         Graph graph = graphTextReader.read();

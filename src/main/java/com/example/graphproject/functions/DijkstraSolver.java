@@ -56,6 +56,7 @@ abstract public class DijkstraSolver {
         }
 
     }
+
     abstract public void print(Node destination);
 
     public NodeDistance[] getDistances() {

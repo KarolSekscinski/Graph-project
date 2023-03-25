@@ -1,6 +1,6 @@
 package com.example.graphproject.functions;
 
-public class NodeDistance implements Comparable<NodeDistance>{
+public class NodeDistance implements Comparable<NodeDistance> {
     private final int nodeId;
     private final double distance;
     private final int otherNodeId;
@@ -10,7 +10,10 @@ public class NodeDistance implements Comparable<NodeDistance>{
         this.distance = distance;
         this.otherNodeId = otherNodeId;
     }
-    public int getNodeId(){return nodeId;}
+
+    public int getNodeId() {
+        return nodeId;
+    }
 
     public double getDistance() {
         return distance;
@@ -19,6 +22,7 @@ public class NodeDistance implements Comparable<NodeDistance>{
     public int getOtherNodeId() {
         return otherNodeId;
     }
+
     @Override
     public int compareTo(NodeDistance otherNode) {
         return Double.compare(this.distance, otherNode.getDistance());

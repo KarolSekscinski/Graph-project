@@ -13,14 +13,13 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class GraphTextReader extends GraphReader {
-//TODO needs refactoring
 
     private final String filePath;
     protected Graph graph;
 
     public GraphTextReader(String filePath) {
         this.graph = null;
-        this.filePath = filePath;
+        this.filePath = "src/main/resources/com/example/graphproject/GraphsDirectory/" + filePath;
     }
 
     @Override
@@ -44,8 +43,7 @@ public class GraphTextReader extends GraphReader {
             }
             for (int k = j + 1; k < lines.length; k++) {
                 if (!lines[k].equals("")) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "Wrong format of graph dimensions.\n", ButtonType.OK);
-                    alert.showAndWait();                                //Są dodatkowe znaki po wymiarach
+                    generateAlert("There are additional characters after dimensions.\n Please remove them.");
                     break;
                 }
 
@@ -54,8 +52,7 @@ public class GraphTextReader extends GraphReader {
             if (rows != -2 && collumns != -2) {
                 graph = new Graph(collumns, rows);
             } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Wrong format of graph dimensions.\n", ButtonType.OK);
-                alert.showAndWait();                    //Liczba wierszy i kolumn niewłaściwie podana
+                generateAlert("Wrong format of graph dimensions.\n Please enter valid file");
             }
 
             String line;
@@ -70,38 +67,30 @@ public class GraphTextReader extends GraphReader {
                 for (j = 0; scanner.hasNext(); j++) {
                     int dest = scanner.nextInt();
                     if (dest > rows * collumns) {
-                        Alert alert = new Alert(Alert.AlertType.ERROR, "Wrong format of graph dimensions.\n", ButtonType.OK);
-                        alert.showAndWait();                                    //Wierzchołek nie należy do grafu
+                        generateAlert("The node doesn't belong to graph\n Please enter a valid file.");
                     }
                     double weight = scanner.nextDouble();
                     if (weight < 0) {
-                        Alert alert = new Alert(Alert.AlertType.ERROR, "Wrong format of graph dimensions.\n", ButtonType.OK);
-                        alert.showAndWait();                            //Waga krawędzi jest ujemna
+                        generateAlert("Weights of edge between nodes cannot be negative\n Please enter a valid file");
                     }
                     newNode.addEdgeToNode(j, new Edge(dest, weight));
 
                 }
                 graph.addNodeToGraph(i, newNode);
             }
-        } catch (NumberFormatException numberFormatException) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Wrong format of graph dimensions.\n", ButtonType.OK);
-            alert.showAndWait();                              //Wymiary nie mogą być liczbami rzeczywistymi.
+        } catch (IllegalArgumentException | InputMismatchException numberFormatException) {
+            generateAlert("Wrong format of graph\n Please enter a valid file.");
 
-        } catch (IllegalArgumentException illegalArgumentException) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Wrong format of graph dimensions.\n", ButtonType.OK);
-            alert.showAndWait();                                    //Wymiary nie mogą być ujemne.
-        } catch (InputMismatchException inputMismatchException) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Wrong format of graph dimensions.\n", ButtonType.OK);
-            alert.showAndWait();                                    //Podano niewlaściwe wagi krawedzi.
         } catch (NullPointerException nullPointerException) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "The graph is empty.", ButtonType.OK);
-            alert.showAndWait();                                //Podany graf jest pusty
+            generateAlert("The graph is empty.");
         } catch (FileNotFoundException fileNotFoundException) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "A file with this name was not found.", ButtonType.OK);
-            alert.showAndWait();                            //Nie ma pliku o takiej nazwie do wczytania
+            generateAlert("A file with this name was not found.");
         }
         return graph;
     }
 
-
+    private void generateAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR, message, ButtonType.OK);
+        alert.showAndWait();
+    }
 }

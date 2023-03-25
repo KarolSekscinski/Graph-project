@@ -77,7 +77,7 @@ public class Graph {
         edgeRange[1] = 0;
 
         for (Node node : this.getNodes()) {
-            for (Edge edge: node.getEdgesOfNode()) {
+            for (Edge edge : node.getEdgesOfNode()) {
                 if (edge.getWeightOfEdge() > edgeRange[1]) {
                     edgeRange[1] = edge.getWeightOfEdge();
                 }

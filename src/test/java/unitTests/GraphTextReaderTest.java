@@ -2,13 +2,13 @@ package unitTests;
 
 import com.example.graphproject.graphUtils.Graph;
 import com.example.graphproject.graphUtils.GraphTextReader;
-import static junit.framework.Assert.assertEquals;
-
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import unitTests.graphTestingTemplates.GraphTemplates;
 
 import java.io.IOException;
+
+import static junit.framework.Assert.assertEquals;
 
 
 public class GraphTextReaderTest {
@@ -46,7 +46,7 @@ public class GraphTextReaderTest {
 
 
     @Test
-    public void testingGraphFromGraphThreeByThree() throws IOException{
+    public void testingGraphFromGraphThreeByThree() throws IOException {
         //given
         graphTextReader = new GraphTextReader("src/main/resources/com/example/graphproject/GraphsDirectory/graph3x3.txt");
 

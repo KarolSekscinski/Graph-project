@@ -27,7 +27,7 @@
                 <Font size="24.0" />
             </font>
         </Label>
-        <Button layoutX="681.0" layoutY="56.0" mnemonicParsing="false" onAction="#onClickDijkstraButton" text="Find the shortest path" />
+        <Button layoutX="681.0" layoutY="56.0" mnemonicParsing="false" onAction="#onClickDijkstraSolverButton" text="Find the shortest path" />
         <Rectangle fx:id="gradientRectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="10.0" layoutY="940.0" stroke="BLACK" strokeType="INSIDE" width="980.0" />
         <Label text="Node / edge weight range" prefWidth="1000" layoutY="920" textAlignment="CENTER" alignment="CENTER"/>
         <Label text="0.0" layoutX="10" layoutY="920" />

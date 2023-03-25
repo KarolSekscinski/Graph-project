@@ -3,8 +3,10 @@ package unitTests;
 import com.example.graphproject.functions.DijkstraConsolePrinter;
 import com.example.graphproject.graphUtils.Graph;
 import com.example.graphproject.graphUtils.Node;
-
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import unitTests.graphTestingTemplates.GraphTemplates;
 
 import java.io.ByteArrayOutputStream;
@@ -148,6 +150,7 @@ public class DijkstraSolverTest {
         Assertions.assertEquals(expectedDistance, actualDistance);
         Assertions.assertEquals(expectedPath, actualPath);
     }
+
     @Test
     public void distanceFromZeroToSixShouldEqualTwelve() {
         //given
