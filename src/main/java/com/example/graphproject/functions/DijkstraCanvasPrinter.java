@@ -31,7 +31,7 @@ public class DijkstraCanvasPrinter extends DijkstraSolver {
 
         double pathSize = graphCoordinatesDeteminer.getNodeSize() / 2;
         GraphicsContext graphicsContext = graphCanvas.getGraphicsContext2D();
-        graphicsContext.setFill(Color.PURPLE);
+        graphicsContext.setFill(Color.WHITE);
 
         graphicsContext.fillOval(graphCoordinatesDeteminer.getCenterOfNodeX(currentNode) - (pathSize / 2),
                 graphCoordinatesDeteminer.getCenterOfNodeY(currentNode) - (pathSize / 2), pathSize, pathSize);
