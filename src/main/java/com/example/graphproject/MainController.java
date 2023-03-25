@@ -1,6 +1,7 @@
 package com.example.graphproject;
 
 import com.example.graphproject.functions.BfsSolver;
+import com.example.graphproject.functions.DijkstraCanvasPrinter;
 import com.example.graphproject.graphUtils.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -53,7 +54,7 @@ public class MainController implements Initializable {
                 new Stop(0.25, Color.rgb(255, 255, 0)),
                 new Stop(0.5, Color.rgb(0, 255, 0)),
                 new Stop(0.75, Color.rgb(0, 255, 255)),
-                new Stop(1, Color.rgb(0, 0, 255))
+                new Stop(1, Color.rgb(0, 0, 255)),
         };
         LinearGradient linearGradient = new LinearGradient(0, 0, 1, 0, true, CycleMethod.NO_CYCLE, stops);
         gradientRectangle.setFill(linearGradient);
@@ -95,16 +96,15 @@ public class MainController implements Initializable {
         selectedNodes.clear();
         clearCanvas();
         if (graph != null) {
-//            GraphCanvasPrinter graphCanvasPrinter = new GraphCanvasPrinter(graph, graphCanvas);
-//            graphCanvasPrinter.print();
+            GraphCanvasPrinter graphCanvasPrinter = new GraphCanvasPrinter(graph, graphCanvas);
+            graphCanvasPrinter.print();
         }
     }
 
     @FXML
     public void onClickSaveButton() {
         if (graph == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Please enter a graph first", ButtonType.OK);
-            alert.showAndWait();
+            generateAlert("Please enter a graph.");
         }
         if (graph != null) {
             try {
@@ -112,8 +112,7 @@ public class MainController implements Initializable {
                 GraphTextPrinter graphTextPrinter = new GraphTextPrinter(filePath, graph);
                 graphTextPrinter.print();
             } catch (Exception e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Something while printing to file went wrong.", ButtonType.OK);
-                alert.showAndWait();
+                generateAlert("While printing to file something went wrong.");
             }
         }
     }
@@ -132,32 +131,25 @@ public class MainController implements Initializable {
         try {
             this.graph = graphTextReader.read();
         } catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Please enter a file name.", ButtonType.OK);
-            alert.showAndWait();
+            generateAlert("Please enter a file name.");
         }
         clearCanvas();
-//        GraphCanvasPrinter graphCanvasPrinter = new GraphCanvasPrinter(graph, graphCanvas);
-//        graphCanvasPrinter.print();
+        GraphCanvasPrinter graphCanvasPrinter = new GraphCanvasPrinter(graph, graphCanvas);
+        graphCanvasPrinter.print();
     }
 
     @FXML
     public void onClickSolveBFS() {
         BfsSolver bfsSolver = new BfsSolver(graph);
         if (graph == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Please load the graph first.", ButtonType.OK);
-            alert.showAndWait();
-            return;
+            generateAlert("Please load the graph.");
         }
         try {
             boolean isGraphCoherent = bfsSolver.solve();
             if (isGraphCoherent) {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "This graph is coherent.", ButtonType.OK);
-                alert.showAndWait();
-                return;
+                generateAlert("This graph is coherent.");
             } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "This graph isn't coherent.", ButtonType.OK);
-                alert.showAndWait();
-                return;
+                generateAlert("This graph isn't coherent.");
             }
         } catch (Exception e) {
             throw new RuntimeException();
@@ -170,12 +162,57 @@ public class MainController implements Initializable {
         graphicsContext.setFill(Color.BLACK);
         graphicsContext.fillRect(0, 0, graphCanvas.getWidth(), graphCanvas.getHeight());
     }
+
     @FXML
-    public void onClickDijkstraButton() {
+    public void onClickDijkstraSolverButton() {
+        if (graph != null && selectedNodes.size() > 1) {
+            DijkstraCanvasPrinter dijkstraCanvasPrinter =
+                    new DijkstraCanvasPrinter(selectedNodes.get(0), new GraphCanvasPrinter(graph, graphCanvas));
+            for (int i = 1; i < selectedNodes.size(); i++) {
+                dijkstraCanvasPrinter.print(selectedNodes.get((i)));
+            }
+        }
+        if (graph == null) {
+            generateAlert("Please load the graph.");
+        }
+        if (selectedNodes.size() == 0) {
+            generateAlert("Please choose the starting and destination nodes.");
+        }
+        if (selectedNodes.size() == 1) {
+            generateAlert("Please choose the destination node.");
+        }
 
     }
+
     @FXML
     public void onClickCanvasMouse(MouseEvent mouseEvent) {
+        if (graph != null) {
+            GraphCanvasPrinter graphCanvasPrinter = new GraphCanvasPrinter(graph, graphCanvas);
+            Node selected = graphCanvasPrinter.selectNode(mouseEvent.getX(), mouseEvent.getY());
+            if (selected != null) {
+                if (selectedNodes.size() == 0) {
+                    selectedNodes.add(selected);
+                    DijkstraCanvasPrinter dijkstraCanvasPrinter = new DijkstraCanvasPrinter(selected, graphCanvasPrinter);
+                    dijkstraCanvasPrinter.makeGradient();
+                } else {
+                    boolean isAlreadyInside = false;
+                    for (Node node : selectedNodes) {
+                        if (node.getNodeId() == selected.getNodeId()) {
+                            isAlreadyInside = true;
+                            break;
+                        }
+                    }
+                    if (!isAlreadyInside) {
+                        selectedNodes.add(selected);
+                        graphCanvasPrinter.paintNode(selected, Color.GREEN);
+                    }
+                }
+            }
+        }
+    }
 
+    private void generateAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR, message);
+        alert.showAndWait();
     }
 }

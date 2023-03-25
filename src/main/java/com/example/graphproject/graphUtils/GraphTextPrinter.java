@@ -9,7 +9,7 @@ public class GraphTextPrinter extends GraphPrinter {
     protected Graph graph;
 
     public GraphTextPrinter(String filePath, Graph graph) {
-        this.filePath = filePath;
+        this.filePath = "src/main/resources/com/example/graphproject/GraphsDirectory/" + filePath;
         this.graph = graph;
     }
 

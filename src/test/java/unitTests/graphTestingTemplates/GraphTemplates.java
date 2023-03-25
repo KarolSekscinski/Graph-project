@@ -9,8 +9,9 @@ import java.util.ArrayList;
 public class GraphTemplates {
 
     public Graph templateGraph;
+
     public Graph templateGraphOne() {
-        templateGraph = new Graph(3,3);
+        templateGraph = new Graph(3, 3);
         for (int i = 0; i < 9; i++) {
             templateGraph.getNodes().add(new Node(i, new ArrayList<>()));
         }
@@ -54,7 +55,7 @@ public class GraphTemplates {
 
     //Maybe should be in testUtils
     public void printToConsole(Graph templateGraph) {
-        System.out.printf("%d %d\n",templateGraph.getRows(), templateGraph.getCollumns());
+        System.out.printf("%d %d\n", templateGraph.getRows(), templateGraph.getCollumns());
         for (int i = 0; i < templateGraph.getSize(); i++) {
             System.out.print("     ");
             for (int j = 0; j < templateGraph.getNodeFromGraph(i).getSize(); j++) {
@@ -68,7 +69,7 @@ public class GraphTemplates {
 
     public Graph coherentGraph() {
         Graph graph = new Graph(3, 3);
-        for (int i = 0; i < 9; i++){
+        for (int i = 0; i < 9; i++) {
             graph.getNodes().add(new Node(i, new ArrayList<>()));
         }
         // node 0
@@ -109,7 +110,7 @@ public class GraphTemplates {
 
     public Graph incoherentGraph() {
         Graph graph = new Graph(3, 3);
-        for (int i = 0; i < 9; i++){
+        for (int i = 0; i < 9; i++) {
             graph.getNodes().add(new Node(i, new ArrayList<>()));
         }
 
@@ -122,8 +123,8 @@ public class GraphTemplates {
         graph.getNodes().get(2).getEdgesOfNode().add(new Edge(5, 1));
         // node 3
         graph.getNodes().get(3).getEdgesOfNode().add(new Edge(0, 2));
-        graph.getNodes().get(3).getEdgesOfNode().add(new Edge(4,4));
-        graph.getNodes().get(3).getEdgesOfNode().add(new Edge(6,3));
+        graph.getNodes().get(3).getEdgesOfNode().add(new Edge(4, 4));
+        graph.getNodes().get(3).getEdgesOfNode().add(new Edge(6, 3));
         // node 4
         graph.getNodes().get(4).getEdgesOfNode().add(new Edge(3, 3));
         // node 5
@@ -142,7 +143,7 @@ public class GraphTemplates {
 
     public Graph templateGraphForDijkstraOne() {
         Graph graph = new Graph(4, 3);
-        for (int i = 0; i < 12; i++){
+        for (int i = 0; i < 12; i++) {
             graph.getNodes().add(new Node(i, new ArrayList<>()));
         }
         //node 0
@@ -174,7 +175,7 @@ public class GraphTemplates {
 
     public Graph templateGraphForDijkstraTwo() {
         Graph graph = new Graph(3, 3);
-        for (int i = 0; i < 9; i++){
+        for (int i = 0; i < 9; i++) {
             graph.getNodes().add(new Node(i, new ArrayList<>()));
         }
         // node 0
