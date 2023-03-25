@@ -147,9 +147,11 @@ public class MainController implements Initializable {
         try {
             boolean isGraphCoherent = bfsSolver.solve();
             if (isGraphCoherent) {
-                generateAlert("This graph is coherent.");
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "This graph is coherent.", ButtonType.OK );
+                alert.showAndWait();
             } else {
-                generateAlert("This graph isn't coherent.");
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "This graph isn't coherent.", ButtonType.OK );
+                alert.showAndWait();
             }
         } catch (Exception e) {
             throw new RuntimeException();
