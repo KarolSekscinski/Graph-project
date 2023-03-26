@@ -1,4 +1,6 @@
-Celem projektu będzie napisanie programu,który spełnia poniższe wymagania:
+Project previously done with my collegue friend @Krezlau
+
+Celem projektu będzie napisanie programu, który spełnia poniższe wymagania:
 
 Potrafi wygenerować graf o zadanej liczbie kolumn i wierszy węzłów i wagach krawędzi losowanych w zadanym zakresie wartości.
 
